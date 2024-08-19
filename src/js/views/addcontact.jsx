@@ -1,46 +1,47 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Contacts, getContacts } from "./contacts.jsx";
+import { Context } from "../store/appContext";
 
 
 export const AddContact = () => {
-    useEffect(()=>{
-        // getContacts();
-	},[])
+    const {store,actions}=useContext(Context);
+    // useEffect(()=>{
+    //     actions.getContacts();
+	// },[])
 
     let [nombre,setNombre] = useState("");
     let [correo,setCorreo] = useState("");
     let [numero,setNumero] = useState("");
     let [direccion,setDireccion] = useState("");
 
-    function postContact() {
-        fetch(
-			'https://playground.4geeks.com/contact/agendas/orubenfr/contacts',{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				  },
-				body: JSON.stringify(
-					{
-						"name": nombre,
-						"phone": numero,
-                        "email": correo,
-                        "address": direccion,
-					  }
-				  ),
+    // function postContact() {
+    //     fetch(
+	// 		'https://playground.4geeks.com/contact/agendas/orubenfr/contacts',{
+	// 			method: 'POST',
+	// 			headers: {
+	// 				'Content-Type': 'application/json'
+	// 			  },
+	// 			body: JSON.stringify(
+	// 				{
+	// 					"name": nombre,
+	// 					"phone": numero,
+    //                     "email": correo,
+    //                     "address": direccion,
+	// 				  }
+	// 			  ),
 				
-			})
-		.then((response)=>response.json()) // 
-		.then((data)=>{
-			console.log(data) // ... spread operator accede directo al contenido
-		})
+	// 		})
+	// 	.then((response)=>response.json()) // 
+	// 	.then((data)=>{
+	// 		console.log(data) // ... spread operator accede directo al contenido
+	// 	})
 		
-		.catch((error)=>console.log(error));
-    }
+	// 	.catch((error)=>console.log(error));
+    // }
 
 
     function guardarContacto() {
-        postContact();
+        actions.postContact();
         alert('Contacto agregado!');
         setNombre("");
         setCorreo("");

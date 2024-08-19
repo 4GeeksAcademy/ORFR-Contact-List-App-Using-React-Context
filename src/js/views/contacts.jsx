@@ -4,25 +4,23 @@ import { Context } from "../store/appContext";
 
 
 export const Contacts = ()=>  {
+    const {store,actions}=useContext(Context);
+    
     useEffect(()=>{
-		getContacts();
-
+	actions.getContacts();
 	},[])
+    // const [listaContactos,setListaContactos] = useState([])
 
-    const [listaContactos,setListaContactos] = useState([])
-
-    function getContacts() {
-        fetch(
-			'https://playground.4geeks.com/contact/agendas/orubenfr/contacts',{
-				method: 'GET',
-			})
-		.then((response)=>response.json())
-		.then((data)=>setListaContactos(data.contacts))
-		.catch((error)=>console.log(error));
-	}
+    // function getContacts() {
+    //     fetch(
+	// 		'https://playground.4geeks.com/contact/agendas/orubenfr/contacts',{
+	// 			method: 'GET',
+	// 		})
+	// 	.then((response)=>response.json())
+	// 	.then((data)=>setListaContactos(data.contacts))
+	// 	.catch((error)=>console.log(error));
+	// }
         
-
-
     return(
 
         <div>
@@ -33,7 +31,7 @@ export const Contacts = ()=>  {
          </div>
 
           <div className="container">
-            {listaContactos.map((item)=> (<div className="row" key={item.id} id={item.id}>
+            {store.listaContactos.map((item)=> (<div className="row" key={item.id} id={item.id}>
                 <h2>{item.name}</h2>
                 <h5>{item.address}</h5>
                 <h5>{item.phone}</h5>

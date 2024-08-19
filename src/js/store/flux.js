@@ -58,7 +58,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.then((data)=>{
 					console.log(data) // ... spread operator accede directo al contenido
 				})
-				
 				.catch((error)=>console.log(error));
 			},
 			changeColor: (index, color) => {
@@ -77,6 +76,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			}
 		}
 	};
+	
 };
 
 export default getState;
+
+

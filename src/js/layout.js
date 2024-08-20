@@ -6,6 +6,7 @@ import { Home } from "./views/home";
 import { Demo } from "./views/demo";
 import { Single } from "./views/single";
 import { Contacts} from "./views/contacts.jsx";
+import {Example} from "./views/modal.jsx"
 import { AddContact } from "./views/addcontact.jsx";
 import injectContext from "./store/appContext";
 

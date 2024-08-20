@@ -2,7 +2,9 @@ import React, { useEffect, useState, useContext  } from "react";
 import { Link} from "react-router-dom";
 import { Context } from "../store/appContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faPencil,faTrash}  from '@fortawesome/free-solid-svg-icons';
+import {faPencil,faTrash,faRotateLeft,faUserPlus}  from '@fortawesome/free-solid-svg-icons';
+
+
 
 
 export const Contacts = ()=>  {
@@ -40,7 +42,7 @@ export const Contacts = ()=>  {
         <div>
          <div className="container-fluid text-center">
             <Link to="/addcontact">
-            <button className="btn btn-success">Add Contact</button>
+            <button className="btn btn-info"><FontAwesomeIcon icon={faUserPlus} /></button>
             </Link>
          </div>
 
@@ -54,7 +56,27 @@ export const Contacts = ()=>  {
                     </div>
                     <div className="col-3 text-center">
                         <Link to="/addcontact"><button onClick={()=>actions.editarContacto(item.id)} ><FontAwesomeIcon icon={faPencil}/></button></Link>
-                        <button onClick={()=>eliminarContacto(item.id)} ><FontAwesomeIcon icon={faTrash} /></button>
+                        {/* <button onClick={()=>eliminarContacto(item.id)} ><FontAwesomeIcon icon={faTrash} /></button> */}
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                            <div className="modal-header">
+                                <h1 className="modal-title fs-5" id="exampleModalLabel">Delete Contact..</h1>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body fs-2">
+                                Are you sure?
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"><FontAwesomeIcon icon={faRotateLeft} /></button>
+                                <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={()=>eliminarContacto(item.id)} ><FontAwesomeIcon icon={faTrash} /></button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                         </div>    
                 </div>))}
           </div>

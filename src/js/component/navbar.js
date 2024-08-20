@@ -7,7 +7,7 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-expand-lg bg-light mb-3">
 			<Link to="/">
-				<span className="navbar-brand mb-0 h1 text-dark"><FontAwesomeIcon icon={faHouse} /></span>
+				<span className="navbar-brand mb-0 h1 text-info"><FontAwesomeIcon icon={faHouse} /></span>
 			</Link>
 			{/* <div className="ml-auto">
 				<Link to="/demo">
@@ -16,7 +16,7 @@ export const Navbar = () => {
 			</div> */}
 			<div className="ml-auto">
 				<Link to="/contacts">
-					<button className="btn btn-info">Contacts <FontAwesomeIcon icon={faAddressBook} /></button>
+					<span className="navbar-brand mb-0 h1 text-info"> <FontAwesomeIcon icon={faAddressBook} /></span>
 				</Link>
 			</div>
 		</nav>

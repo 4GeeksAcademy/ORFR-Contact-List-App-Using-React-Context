@@ -53,7 +53,7 @@ export const Contacts = ()=>  {
                     <h5>{item.email}</h5>
                     </div>
                     <div className="col-3 text-center">
-                        <button><FontAwesomeIcon icon={faPencil}/></button>
+                        <Link to="/addcontact"><button onClick={()=>actions.editarContacto(item.id)} ><FontAwesomeIcon icon={faPencil}/></button></Link>
                         <button onClick={()=>eliminarContacto(item.id)} ><FontAwesomeIcon icon={faTrash} /></button>
                         </div>    
                 </div>))}

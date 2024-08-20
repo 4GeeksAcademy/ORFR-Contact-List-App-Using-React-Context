@@ -10,54 +10,37 @@ export const AddContact = () => {
 	// },[])
     let navigate = useNavigate();
 
-    let [nombre,setNombre] = useState("");
-    let [correo,setCorreo] = useState("");
-    let [numero,setNumero] = useState("");
-    let [direccion,setDireccion] = useState("");
+    let [nombre,setNombre] = useState(store.contacto.name !==""  ? store.contacto.name : '');
+      
+    let [correo,setCorreo] = useState(store.contacto.email !==""  ? store.contacto.email : '');
+    let [numero,setNumero] = useState(store.contacto.phone !==""  ? store.contacto.phone : '');
+    let [direccion,setDireccion] = useState(store.contacto.address !==""  ? store.contacto.address : '');
 
-    // function postContact() {
-    //     fetch(
-	// 		'https://playground.4geeks.com/contact/agendas/orubenfr/contacts',{
-	// 			method: 'POST',
-	// 			headers: {
-	// 				'Content-Type': 'application/json'
-	// 			  },
-	// 			body: JSON.stringify(
-	// 				{
-	// 					"name": nombre,
-	// 					"phone": numero,
-    //                     "email": correo,
-    //                     "address": direccion,
-	// 				  }
-	// 			  ),
-				
-	// 		})
-	// 	.then((response)=>response.json()) // 
-	// 	.then((data)=>{
-	// 		console.log(data) // ... spread operator accede directo al contenido
-	// 	})
-		
-	// 	.catch((error)=>console.log(error));
-    // }
 
 
     function guardarContacto() {
-        let payload={
+        const payload={
             name: nombre,
             phone: numero,
             email: correo,
             address: direccion,
         };
-
-        actions.postContact(payload);
-        alert('Contacto agregado!');
+        if(Object.keys(store.contacto).length===0) {
+             actions.postContact(payload) }
+             else{
+        actions.putContact(payload,store.contacto.id);
+             };
+        
+        alert('Datos Cargados!');
         navigate("/contacts");
         setNombre("");
         setCorreo("");
         setDireccion("");
         setNumero("");
+        // store.contacto=({});
 
     }
+
 
     return(
         <div className="container">

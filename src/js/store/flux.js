@@ -15,7 +15,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 				
 			],
-			listaContactos: []
+			listaContactos: [],
+			contacto:[]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -38,6 +39,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			postContact: (payload) => {
+				const store = getStore();
 				fetch(
 					'https://playground.4geeks.com/contact/agendas/orubenfr/contacts',{
 						method: 'POST',
@@ -53,7 +55,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data) // ... spread operator accede directo al contenido
 				})
 				.catch((error)=>console.log(error));
+				console.log(store.listaContactos);
+				
 			},
+
+
+			putContact: (payload,id) => {
+				fetch(
+					`https://playground.4geeks.com/contact/agendas/orubenfr/contacts/${id}`,{
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json'
+						  },
+						body: JSON.stringify(
+							payload
+						  ),
+					})
+				.then((response)=>response.json()) // 
+				.then((data)=>{
+					console.log(data) // ... spread operator accede directo al contenido
+				})
+				.catch((error)=>console.log(error));
+				setStore({contacto: []});
+			},
+
+			editarContacto: (id) =>{
+				const store = getStore();
+				store.contacto = store.listaContactos.find((item)=>item.id ==id);
+				// console.log(store.contacto.id);
+				
+			},
+
 
 			deleteContact: (id,newlista) => {
 				fetch(

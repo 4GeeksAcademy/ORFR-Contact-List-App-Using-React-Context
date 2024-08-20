@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				.catch((error)=>console.log(error));
 			},
 
-			postContact: () => {
+			postContact: (payload) => {
 				fetch(
 					'https://playground.4geeks.com/contact/agendas/orubenfr/contacts',{
 						method: 'POST',
@@ -45,14 +45,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 							'Content-Type': 'application/json'
 						  },
 						body: JSON.stringify(
-							{
-								"name": nombre,
-								"phone": numero,
-								"email": correo,
-								"address": direccion,
-							  }
+							payload
 						  ),
-						
 					})
 				.then((response)=>response.json()) // 
 				.then((data)=>{
@@ -60,6 +54,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.catch((error)=>console.log(error));
 			},
+
+			deleteContact: (id,newlista) => {
+				fetch(
+					`https://playground.4geeks.com/contact/agendas/orubenfr/contacts/${id}`,{
+						method: 'DELETE',
+						headers: {
+							'Content-Type': 'application/json'
+						  },
+					})
+				.then((response)=>response.json()) // 
+				.then((response)=>console.log(response))
+				.catch((error)=>console.log(error));
+				setStore({ listaContactos: newlista });
+			},
+
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 
@@ -8,6 +8,7 @@ export const AddContact = () => {
     // useEffect(()=>{
     //     actions.getContacts();
 	// },[])
+    let navigate = useNavigate();
 
     let [nombre,setNombre] = useState("");
     let [correo,setCorreo] = useState("");
@@ -41,12 +42,21 @@ export const AddContact = () => {
 
 
     function guardarContacto() {
-        actions.postContact();
+        let payload={
+            name: nombre,
+            phone: numero,
+            email: correo,
+            address: direccion,
+        };
+
+        actions.postContact(payload);
         alert('Contacto agregado!');
+        navigate("/contacts");
         setNombre("");
         setCorreo("");
         setDireccion("");
         setNumero("");
+
     }
 
     return(
